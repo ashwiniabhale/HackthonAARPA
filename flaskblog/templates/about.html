@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>Result Analysis</h1>
+<style>
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+</style>
+  <form method="post" action = "#">
+
+    <label for="fname">Roll No</label>
+    <input type="text" id="rollno" name="rollno" placeholder="Roll No">
+
+    <label for="lname">Student Name </label>
+    <input type="text" id="studname" name="studname" placeholder="Name of Student">
+
+    <label for="lname">Subject 1 </label>
+    <input type="text" id="sub1" name="sub1" placeholder="Subject 1 Marks ">
+
+    <label for="lname">Subject 2 </label>
+    <input type="text" id="sub2" name="sub2" placeholder="Subject 2 Marks ">
+
+      <label for="lname">Subject 3 </label>
+    <input type="text" id="sub3" name="sub3" placeholder="Subject 3 Marks ">
+
+      <label for="lname">Subject 4</label>
+    <input type="text" id="sub4" name="sub4" placeholder="Subject 4 Marks ">
+
+      <label for="lname">Subject 5 </label>
+    <input type="text" id="sub5" name="sub5" placeholder="Subject 5 Marks ">
+
+      <label for="lname">Lab 1 </label>
+    <input type="text" id="lab1" name="lab1" placeholder="Lab 1 Marks ">
+
+      <label for="lname">Lab 2 </label>
+    <input type="text" id="lab2" name="lab2" placeholder="Lab 2 Marks">
+
+      <label for="lname">Lab 3 </label>
+    <input type="text" id="lab3" name="lab3" placeholder="Lab 3 Marks">
+
+    <button name="subject" type="submit" style="background:#1b579e; border-radius:3px; padding:3px 5px; color:#fff;" class="btn">Submit Your Marks</button>
+
+  </form>
+
+<h3>Your Result</h3>
+<ul>
+  <li>Name : {{name}}</li>
+  <li>Roll No : {{rollno}}</li>
+  <li>Result :{{result}}</li>
+</ul>
+{% endblock content %}
