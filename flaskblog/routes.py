@@ -72,7 +72,6 @@ def about():
 
 @app.route("/getresult", methods=['GET', 'POST'])
 def getresult():
-<<<<<<< HEAD
 
     r1 = ""
     r2 = ""
@@ -81,17 +80,11 @@ def getresult():
     email=""
     status = ""
     status1 = ""
-=======
-    rollno = ""
-    email=""
-    status = ""
->>>>>>> ffbddb8c653505a527a2ef98b1aa63b2c92fe5d8
     if request.method == 'POST':
         # page = request.args.get('page', 1, type=int)
         # posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=5)
         #name = request.form['studname']
         #a = numpy.array([lab3])
-<<<<<<< HEAD
 
         rollno = int(request.form['rollno'])
         email = str(request.form['email'])
@@ -115,20 +108,6 @@ def getresult():
             status = "Your Result sent to your email id sucessfully."
             status1 = r3
     return render_template('getresult.html', title='Prediction', status = status, status1 = status1 )
-=======
-        rollno = int(request.form['rollno'])
-        email = str(request.form['email'])
-        result = data.loc[data['rollno'] == rollno]
-        #print(result)# creates SMTP session
-        s = smtplib.SMTP('smtp.gmail.com', 587)
-        s.starttls()
-        s.login("pratiklatex@gmail.com", "Pratik@1234")
-        message = str(result)
-        s.sendmail("pratiklatex@gmail.com", email , message)
-        s.quit()
-        status = "Your Result sent to your email id sucessfully."
-    return render_template('getresult.html', title='Prediction', status = status )
->>>>>>> ffbddb8c653505a527a2ef98b1aa63b2c92fe5d8
 
 
 @app.route("/register", methods=['GET', 'POST'])
