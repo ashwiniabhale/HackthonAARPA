@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>Result Analysis : Prediction of Result Using Machine Learning</h1>
+<style>
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+</style>
+  <form method="post" action = "#">
+
+    <label for="fname">Roll No</label>
+    <input type="text" id="rollno" name="rollno" placeholder="Roll No">
+
+    <label for="lname">Email </label>
+    <input type="text" id="email" name="email" placeholder="Email id Student">
+
+    <button name="subject" type="submit" style="background:#1b579e; border-radius:3px; padding:3px 5px; color:#fff;" class="btn">Send Me Email</button>
+
+  </form>
+<br>
+<br>
+<h5>Status of Email Sending : {{status }}</h5>
+
+{% endblock content %}
