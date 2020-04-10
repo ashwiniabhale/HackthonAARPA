@@ -11,6 +11,8 @@ from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
 from classifier import *
 from flask import Flask, request, render_template
+import smtplib
+
 #@login_required
 @app.route("/")
 @app.route("/home", methods=['GET', 'POST'])
@@ -39,34 +41,73 @@ def about():
         # page = request.args.get('page', 1, type=int)
         # posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=5)
         name = request.form['studname']
-        #a = numpy.array([lab3])
+        # a = numpy.array([lab3])
         rollno = request.form['rollno']
-        #X_text.append(name)
+        # X_text.append(name)
         sub1 = int(request.form['sub1'])
-        #a = numpy.array([sub1])
+        # a = numpy.array([sub1])
         sub2 = int(request.form['sub2'])
-        #a = numpy.array([sub2])
+        # a = numpy.array([sub2])
         sub3 = int(request.form['sub3'])
-        #a = numpy.array([sub3])
+        # a = numpy.array([sub3])
         sub4 = int(request.form['sub4'])
-        #a = numpy.array([sub4])
+        # a = numpy.array([sub4])
         sub5 = int(request.form['sub5'])
-        #a = numpy.array([sub5])
+        # a = numpy.array([sub5])
         lab1 = int(request.form['lab1'])
-       # a = numpy.array([lab1])
+        # a = numpy.array([lab1])
         lab2 = int(request.form['lab2'])
-        #a = numpy.array([lab2])
+        # a = numpy.array([lab2])
         lab3 = int(request.form['lab3'])
         a = numpy.array([[sub1, sub2, sub3, sub4, sub5, lab1, lab2, lab3]])
         a = a
         # X_test = np.asarray(X_test)
         y_pred = cls.predict(a)
         listToStr = ' '.join(map(str, y_pred))
-        if(listToStr == '1'):
+        if (listToStr == '1'):
             result = "Pass"
         else:
             result = "Fail"
-    return render_template('about.html', title='About', result   = result,name = name, rollno = rollno )
+    return render_template('about.html', title='FinalResult', result=result, name=name, rollno=rollno)
+
+@app.route("/getresult", methods=['GET', 'POST'])
+def getresult():
+
+    r1 = ""
+    r2 = ""
+    r3 = ""
+    rollno = ""
+    email=""
+    status = ""
+    status1 = ""
+    if request.method == 'POST':
+        # page = request.args.get('page', 1, type=int)
+        # posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=5)
+        #name = request.form['studname']
+        #a = numpy.array([lab3])
+
+        rollno = int(request.form['rollno'])
+        email = str(request.form['email'])
+        result = data.loc[data['rollno'] == rollno]
+        r1 = str(result['rollno'].values)
+        r2 = str(result['name'].values)
+        r3 = str(result['result'].values)
+        #print(r1, r2, r3)
+        #print(result)# creates SMTP session
+        try:
+            s = smtplib.SMTP('smtp.gmail.com', 587)
+            s.starttls()
+            s.login("pratiklatex@gmail.com", "Pratik@1234")
+            message = str(result)
+            s.sendmail("pratiklatex@gmail.com", email , message)
+            s.quit()
+        except :
+            status = "error in mail sending"
+        finally :
+
+            status = "Your Result sent to your email id sucessfully."
+            status1 = r3
+    return render_template('getresult.html', title='Prediction', status = status, status1 = status1 )
 
 
 @app.route("/register", methods=['GET', 'POST'])
